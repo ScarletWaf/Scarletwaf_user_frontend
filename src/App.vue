@@ -6,7 +6,71 @@
       :clipped="$vuetify.breakpoint.lgAndUp"
       app
     >
-      <v-list dense>
+<!--      尝试循环失败-->
+<!--      <v-list>-->
+<!--          <v-list-item-->
+<!--            v-for="item in items"-->
+<!--            :key="item"-->
+<!--            link-->
+<!--            to="{{item.link}}"-->
+<!--          >-->
+<!--              <v-list-item-icon>-->
+<!--                <v-icon>{{item.icon}}</v-icon>-->
+<!--              </v-list-item-icon>-->
+<!--              <v-list-item-content>-->
+<!--                <v-list-item-title>{{item.text}}</v-list-item-title>-->
+<!--              </v-list-item-content>-->
+<!--          </v-list-item>-->
+<!--      </v-list>-->
+      <v-list>
+
+        <v-list-item
+          link
+          to="/"
+        >
+          <v-list-item-icon>
+            <v-icon>mdi-monitor-screenshot</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>Waf 实时信息</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item
+          link
+          to="/RuleConfig"
+        >
+          <v-list-item-icon>
+            <v-icon>mdi-cog-outline</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>自定义规则</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item
+          link
+          to="/ScarletPot"
+        >
+          <v-list-item-icon>
+            <v-icon>mdi-beehive-outline</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>蜜罐</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item
+          link
+          to="/Message"
+        >
+          <v-list-item-icon>
+            <v-icon>mdi-bell</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>消息通知</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
 
       </v-list>
     </v-navigation-drawer>
@@ -63,10 +127,12 @@ export default {
   },
   data: () => ({
     dialog: false,
-    drawer: null,
-    items: [
-      { icon: 'mdi-contacts', text: 'Contacts' }
-    ]
+    drawer: null
+    // items: [
+    //   { icon: 'mdi-contacts', text: 'Contacts', link: 'views/WafDetails' },
+    //   { icon: 'mdi-contacts', text: 'Contacts', link: 'views/WafDetails' },
+    //   { icon: 'mdi-contacts', text: 'Contacts', link: 'views/WafDetails' }
+    // ]
   }),
   methods: {
     onLogout () {}

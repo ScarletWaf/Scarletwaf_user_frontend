@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import WafDetails from '../views/WafDetails'
+import RuleConfig from '../views/RuleConfig'
+import ScarletPot from '../views/ScarletPot'
+import Message from '../views/Message'
+import Login from '../views/Login'
 
 Vue.use(VueRouter)
 
@@ -9,15 +13,27 @@ const routes = [
     path: '/',
     name: 'WafDetails',
     component: WafDetails
+  },
+  {
+    path: '/RuleConfig',
+    name: 'RuleConfig',
+    component: RuleConfig
+  },
+  {
+    path: '/ScarletPot',
+    name: 'ScarletPot',
+    component: ScarletPot
+  },
+  {
+    path: '/Message',
+    name: 'Message',
+    component: Message
+  },
+  {
+    path: '/Login',
+    name: 'Login',
+    component: Login
   }
-  // {
-  //   path: '/about',
-  //   name: 'About',
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  // }
 ]
 
 const router = new VueRouter({
