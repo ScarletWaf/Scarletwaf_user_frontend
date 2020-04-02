@@ -14,12 +14,14 @@
 <!--            link-->
 <!--            to="{{item.link}}"-->
 <!--          >-->
+<!--&lt;!&ndash;            <router-link to="{{item.link}}">&ndash;&gt;-->
 <!--              <v-list-item-icon>-->
 <!--                <v-icon>{{item.icon}}</v-icon>-->
 <!--              </v-list-item-icon>-->
 <!--              <v-list-item-content>-->
 <!--                <v-list-item-title>{{item.text}}</v-list-item-title>-->
 <!--              </v-list-item-content>-->
+<!--&lt;!&ndash;            </router-link>&ndash;&gt;-->
 <!--          </v-list-item>-->
 <!--      </v-list>-->
       <v-list>
@@ -87,7 +89,7 @@
         style="width: 300px"
         class="ml-0 pl-4"
       >
-        <span class="hidden-sm-and-down">Scarletwaf 用户界面</span>
+        <span class="hidden-sm-and-down">ScarletWaf 用户界面</span>
       </v-toolbar-title>
 
       <v-text-field
@@ -127,15 +129,16 @@ export default {
   },
   data: () => ({
     dialog: false,
-    drawer: null
-    // items: [
-    //   { icon: 'mdi-contacts', text: 'Contacts', link: 'views/WafDetails' },
-    //   { icon: 'mdi-contacts', text: 'Contacts', link: 'views/WafDetails' },
-    //   { icon: 'mdi-contacts', text: 'Contacts', link: 'views/WafDetails' }
-    // ]
+    drawer: false,
+    items: [
+      { icon: 'mdi-contacts', text: 'Contacts', link: '/' },
+      { icon: 'mdi-contacts', text: 'Contacts', link: '/RuleConfig' }
+    ]
   }),
   methods: {
-    onLogout () {}
+    onLogout () {
+      this.$router.push({ path: '/Login' })
+    }
   }
 }
 </script>
