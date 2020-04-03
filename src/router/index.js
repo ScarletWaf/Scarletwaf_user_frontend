@@ -5,6 +5,7 @@ import RuleConfig from '../views/RuleConfig'
 import ScarletPot from '../views/ScarletPot'
 import Message from '../views/Message'
 import Login from '../views/Login'
+import Register from '../views/Register'
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,11 @@ const routes = [
     path: '/Login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/Register',
+    name: 'Register',
+    component: Register
   }
 ]
 

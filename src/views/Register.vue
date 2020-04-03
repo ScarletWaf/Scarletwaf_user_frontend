@@ -7,7 +7,7 @@
     </v-row>
     <br>
     <v-card class="mx-auto" max-width="400">
-      <v-card-title>登录</v-card-title>
+      <v-card-title>注册</v-card-title>
       <v-card-text>
         <v-form ref="form">
           <v-text-field
@@ -25,18 +25,26 @@
             required
             autocomplete="off"
           />
+          <v-text-field
+            v-model="inputForm.confirmPassword"
+            :rules="passwordRules"
+            label="确认密码"
+            type="password"
+            required
+            autocomplete="off"
+          />
         </v-form>
       </v-card-text>
 
       <v-card-actions>
-        <v-btn text color="primary" @click="onLogin">登录</v-btn>
+        <v-btn text color="primary" @click="onRegister">注册</v-btn>
         <v-btn text @click="onReset">重置</v-btn>
-        <v-btn text @click="toRegister">去注册</v-btn>
+        <v-btn text @click="toLogin">返回登录</v-btn>
       </v-card-actions>
     </v-card>
     <div class="mt-8 text-center">ScarletWaf管理面板</div>
 
-    <!-- 登录等待 -->
+    <!-- 注册等待 -->
     <v-dialog v-model="isLoading" hide-overlay persistent width="300">
       <v-card dark>
         <v-card-text>
@@ -67,37 +75,35 @@
         ],
         inputForm: {
           Name: '',
-          Password: ''
+          Password: '',
+          confirmPassword:''
+
         }
       }
     },
     methods: {
-      onLogin: function(){
+      onRegister: function(){
         axios.post(
-          config.log_api,
+          config.reg_api,
           this.$qs.stringify(this.inputForm),
         ).then((res) => {
-          // Check the callback
-          var log_result = res.data
-          if(log_result.message == "登录成功")
-          {
-            localStorage.setItem('token', log_result.token)
-            localStorage.setItem('username', log_result.username)
+          var login_result = res.data
+          if (login_result.message == "注册成功"){
             this.$message({
-              message: "登陆成功",
+              message: "注册成功",
               type: 'success',
               onClose:() => {
-                this.$router.replace({path: '/'})
+                this.$router.replace({path: '/login'})
               }
             });
           }
-          else if(log_result.message === "用户名或密码错误")
+          else if (login_result.message == "用户名已存在")
           {
-            this.$message.error('用户名或密码错误');
+            this.$message.error('用户名已存在');
           }
-          else if (log_result.message === "用户名或密码为空")
+          else if (login_result.message == "注册失败")
           {
-            this.$message.error('用户名或密码为空');
+            this.$message.error('注册失败');
           }
         })
       },
@@ -107,8 +113,8 @@
           Password: ''
         }
       },
-      toRegister(){
-        this.$router.push({path: '/Register'})
+      toLogin(){
+        this.$router.push({path: '/Login'})
       }
 
     }
@@ -117,3 +123,4 @@
 
 <style scoped>
 </style>
+
