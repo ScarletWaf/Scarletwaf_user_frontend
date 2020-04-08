@@ -75,6 +75,7 @@
         </v-list-item>
 
       </v-list>
+
     </v-navigation-drawer>
 
     <v-app-bar
@@ -87,19 +88,19 @@
 
       <v-toolbar-title
         style="width: 300px"
-        class="ml-0 pl-4"
+        class=""
       >
         <span class="hidden-sm-and-down">ScarletWaf 用户界面</span>
       </v-toolbar-title>
 
-      <v-text-field
-        flat
-        solo-inverted
-        hide-details
-        prepend-inner-icon="mdi-magnify"
-        label="Search"
-        class="hidden-sm-and-down"
-      />
+<!--      <v-text-field-->
+<!--        flat-->
+<!--        solo-inverted-->
+<!--        hide-details-->
+<!--        prepend-inner-icon="mdi-magnify"-->
+<!--        label="Search"-->
+<!--        class="hidden-sm-and-down"-->
+<!--      />-->
       <v-spacer></v-spacer>
 
       <v-toobar-items>
