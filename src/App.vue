@@ -74,6 +74,18 @@
           </v-list-item-content>
         </v-list-item>
 
+        <v-list-item
+          link
+          to="/Test"
+        >
+          <v-list-item-icon>
+            <v-icon>mdi-bell</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>Test</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
       </v-list>
 
     </v-navigation-drawer>
@@ -88,19 +100,10 @@
 
       <v-toolbar-title
         style="width: 300px"
-        class=""
       >
         <span class="hidden-sm-and-down">ScarletWaf 用户界面</span>
       </v-toolbar-title>
 
-<!--      <v-text-field-->
-<!--        flat-->
-<!--        solo-inverted-->
-<!--        hide-details-->
-<!--        prepend-inner-icon="mdi-magnify"-->
-<!--        label="Search"-->
-<!--        class="hidden-sm-and-down"-->
-<!--      />-->
       <v-spacer></v-spacer>
 
       <v-toobar-items>
@@ -110,7 +113,7 @@
           @click="onLogout"
         >
           <v-icon left>mdi-power</v-icon>
-          <div >Out</div>
+          <div>Out</div>
         </v-btn>
       </v-toobar-items>
 

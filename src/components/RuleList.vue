@@ -3,13 +3,14 @@
     <template v-slot:default>
       <thead>
       <tr>
-        <th class="text-left">Rule</th>
+        <th class="font-weight-black subtitle-1">Rule</th>
       </tr>
       </thead>
       <tbody>
-        <tr v-for="item in items" :key="item">
+        <tr v-for="(item,index) in items" :key="index">
             <td>{{ item}}</td>
-  <!--          <td><v-btn color = "blue" outlined>Delete</v-btn></td>-->
+<!--            <td><v-icon @click="Edit">mdi-pencil-outline</v-icon></td>-->
+            <td><v-icon @click="deleteItem" class="float-right">mdi-close-circle-outline</v-icon></td>
         </tr>
       </tbody>
     </template>
@@ -19,16 +20,15 @@
 <script>
 export default {
   name: 'RuleList',
-  props: [],
-  data () {
-    return {
-      items: ['ruledsadadasa1',
-        'dsafdfiifidnfi2',
-        'dssssssssdwewe3',
-        'ddddddd2iiiiiiiiii4',
-        'regegregfdfjlkdajg;saj'
-      ]
-    }
+  props: ['items'],
+  // data () {
+  //   return {
+  //     ]
+  //   }
+  // }
+  methods: {
+    deleteItem () {}
+    // Edit () {}
   }
 
 }

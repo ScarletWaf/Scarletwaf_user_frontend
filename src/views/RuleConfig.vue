@@ -1,7 +1,15 @@
 <template>
+  <div>
     <v-card color="basil">
-      <v-card-title class="text-center justify-center py-6">
-        <h1 class="font-weight-bold display-3 basil--text">BASiL</h1>
+      <v-card-title>
+        <v-text-field
+          class="mx-4"
+          flat
+          hide-details
+          label="Search"
+          solo-inverted
+          append-icon="mdi-magnify"
+        ></v-text-field>
       </v-card-title>
 
       <v-tabs
@@ -11,10 +19,10 @@
         grow
       >
         <v-tab
-          v-for="ruleName in ruleNames"
-          :key="ruleName"
+          v-for="ruleType in ruleTypes"
+          :key="ruleType"
         >
-          {{ ruleName }}
+          {{ ruleType }}
         </v-tab>
       </v-tabs>
 
@@ -28,44 +36,46 @@
             flat
           >
             <v-card-text>
-              <rule-list ></rule-list>
+              <rule-list :items="rules"></rule-list>
             </v-card-text>
           </v-card>
         </v-tab-item>
       </v-tabs-items>
+
     </v-card>
+
+    <add-rule></add-rule>
+  </div>
 </template>
 
 <script>
 import RuleList from '../components/RuleList'
+import AddRule from '../components/AddRule'
 
 export default {
   name: 'RuleConfig',
-  component: {
-    RuleList
+  components: {
+    RuleList,
+    AddRule
   },
   data () {
     return {
       tab: null,
-      text: 'just a test',
-      ruleNames: [
-        'rulename1',
-        'rulename2',
-        'rulename3',
-        'rulename4',
-        'rulename5'
-      ],
-      items: ['ruledsadadasa1',
-        'dsafdfiifidnfi2',
-        'dssssssssdwewe3',
-        'ddddddd2iiiiiiiiii4',
-        'regegregfdfjlkdajg;saj'
+      ruleTypes: [
+        'ruletype1',
+        'ruletype2',
+        'ruletype3',
+        'ruletype4',
+        'ruletype5'
       ],
       ruleFile: [
         ['ruledsadadasa1',
           'dsafdfiifidnfi2',
           'dssssssssdwewe3',
-          'ddddddd2iiiiiiiiii4'
+          'ddddddd2iiiiiiiiii4',
+          '5',
+          '6',
+          '7'
         ],
         ['ruledsadadasa1',
           'dsafdfiifidnfi2',
@@ -89,6 +99,9 @@ export default {
         ]
       ]
     }
+  },
+  methods: {
+    addRule () {}
   }
 }
 </script>

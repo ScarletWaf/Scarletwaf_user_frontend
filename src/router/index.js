@@ -6,6 +6,7 @@ import ScarletPot from '../views/ScarletPot'
 import Message from '../views/Message'
 import Login from '../views/Login'
 import Register from '../views/Register'
+import Test from '../views/Test'
 
 Vue.use(VueRouter)
 
@@ -39,6 +40,11 @@ const routes = [
     path: '/Register',
     name: 'Register',
     component: Register
+  },
+  {
+    path: '/Test',
+    name: 'Test',
+    component: Test
   }
 ]
 
