@@ -7,6 +7,7 @@ import Message from '../views/Message'
 import Login from '../views/Login'
 import Register from '../views/Register'
 import Test from '../views/Test'
+import WafAdmin from '../views/WafAdmin'
 
 Vue.use(VueRouter)
 
@@ -45,6 +46,11 @@ const routes = [
     path: '/Test',
     name: 'Test',
     component: Test
+  },
+  {
+    path: '/WafAdmin',
+    name: 'WafAdmin',
+    component: WafAdmin
   }
 ]
 

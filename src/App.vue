@@ -7,23 +7,6 @@
       app
     >
 <!--      尝试循环失败-->
-<!--      <v-list>-->
-<!--          <v-list-item-->
-<!--            v-for="item in items"-->
-<!--            :key="item"-->
-<!--            link-->
-<!--            to="{{item.link}}"-->
-<!--          >-->
-<!--&lt;!&ndash;            <router-link to="{{item.link}}">&ndash;&gt;-->
-<!--              <v-list-item-icon>-->
-<!--                <v-icon>{{item.icon}}</v-icon>-->
-<!--              </v-list-item-icon>-->
-<!--              <v-list-item-content>-->
-<!--                <v-list-item-title>{{item.text}}</v-list-item-title>-->
-<!--              </v-list-item-content>-->
-<!--&lt;!&ndash;            </router-link>&ndash;&gt;-->
-<!--          </v-list-item>-->
-<!--      </v-list>-->
       <v-list>
 
         <v-list-item
@@ -83,6 +66,18 @@
           </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title>Test</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item
+          link
+          to="/WafAdmin"
+        >
+          <v-list-item-icon>
+            <v-icon>mdi-bell</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>Waf选项</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
