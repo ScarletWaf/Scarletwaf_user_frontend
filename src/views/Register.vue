@@ -11,24 +11,23 @@
       <v-card-text>
         <v-form ref="form">
           <v-text-field
-            v-model="inputForm.Name"
+            v-model="inputForm.name"
             :rules="nameRules"
             label="账号"
             required
             autocomplete="off"
           />
           <v-text-field
-            v-model="inputForm.Password"
-            :rules="passwordRules"
-            label="密码"
-            type="password"
+            v-model="inputForm.email"
+            :rules="emailRules"
+            label="邮箱"
             required
             autocomplete="off"
           />
           <v-text-field
-            v-model="inputForm.confirmPassword"
+            v-model="inputForm.password"
             :rules="passwordRules"
-            label="确认密码"
+            label="密码"
             type="password"
             required
             autocomplete="off"
@@ -58,69 +57,66 @@
 </template>
 
 <script>
-/* eslint-disable */
+import config from '../config'
 
-  export default {
-    name: "Login",
-    data() {
-      return {
-        isLoading: false,
-        messageBar: false,
-        message: '',
-        nameRules: [
-          v => !!v || '请输入账号'
-        ],
-        passwordRules: [
-          v => !!v || '请输入密码'
-        ],
-        inputForm: {
-          Name: '',
-          Password: '',
-          confirmPassword:''
-
+export default {
+  name: 'Register',
+  data () {
+    return {
+      isLoading: false,
+      messageBar: false,
+      message: '',
+      nameRules: [
+        v => !!v || '请输入账号'
+      ],
+      emailRules: [
+        v => !!v || '请输入邮箱'
+      ],
+      passwordRules: [
+        v => !!v || '请输入密码'
+      ],
+      inputForm: {
+        name: '',
+        email: '',
+        password: ''
+      }
+    }
+  },
+  methods: {
+    onRegister: function () {
+      this.axios.post(
+        config.RegApi,
+        JSON.stringify(this.inputForm)
+      ).then((response) => {
+        console.log(response.data)
+        var RegisterResult = response.data
+        if (RegisterResult.msg === '注册成功') {
+          this.$message({
+            message: '注册成功',
+            type: 'success',
+            onClose: () => {
+              this.$router.replace({ path: '/Login' })
+            }
+          })
+        } else if (RegisterResult.code === '用户不合法') {
+          this.$message.error('用户名不合法')
         }
+      })
+    },
+    onReset () {
+      this.inputForm = {
+        name: '',
+        email: '',
+        password: ''
       }
     },
-    methods: {
-      onRegister: function(){
-        axios.post(
-          config.reg_api,
-          this.$qs.stringify(this.inputForm),
-        ).then((res) => {
-          var login_result = res.data
-          if (login_result.message == "注册成功"){
-            this.$message({
-              message: "注册成功",
-              type: 'success',
-              onClose:() => {
-                this.$router.replace({path: '/login'})
-              }
-            });
-          }
-          else if (login_result.message == "用户名已存在")
-          {
-            this.$message.error('用户名已存在');
-          }
-          else if (login_result.message == "注册失败")
-          {
-            this.$message.error('注册失败');
-          }
-        })
-      },
-      onReset() {
-        this.inputForm = {
-          Name: '',
-          Password: ''
-        }
-      },
-      toLogin(){
-        this.$router.push({path: '/Login'})
-      }
-
+    toLogin () {
+      this.$router.push({ path: '/Login' })
     }
+
   }
+}
 </script>
 
 <style scoped>
 </style>
-

@@ -11,9 +11,9 @@
       <v-card-text>
         <v-form ref="form">
           <v-text-field
-            v-model="inputForm.Name"
+            v-model="inputForm.Email"
             :rules="nameRules"
-            label="账号"
+            label="邮箱"
             required
             autocomplete="off"
           />
@@ -50,69 +50,67 @@
 </template>
 
 <script>
-/* eslint-disable */
+import config from '../config'
 
-  export default {
-    name: "Login",
-    data() {
-      return {
-        isLoading: false,
-        messageBar: false,
-        message: '',
-        nameRules: [
-          v => !!v || '请输入账号'
-        ],
-        passwordRules: [
-          v => !!v || '请输入密码'
-        ],
-        inputForm: {
-          Name: '',
-          Password: ''
+export default {
+  name: 'Login',
+  data () {
+    return {
+      isLoading: false,
+      messageBar: false,
+      message: '',
+      nameRules: [
+        v => !!v || '请输入账号'
+      ],
+      emailRules: [
+        v => !!v || '请输入邮箱'
+      ],
+      passwordRules: [
+        v => !!v || '请输入密码'
+      ],
+      inputForm: {
+        Name: '',
+        Email: '',
+        Password: ''
+      }
+    }
+  },
+  methods: {
+    onLogin: function () {
+      this.axios.post(
+        config.LogApi,
+        JSON.stringify(this.inputForm)
+      ).then((response) => {
+        console.log(response)
+        var LogResult = response.data
+        if (LogResult.msg === '登录成功') {
+          localStorage.setItem('token', LogResult.token)
+          localStorage.setItem('username', LogResult.username)
+          this.$message({
+            message: '登陆成功',
+            type: 'success',
+            onClose: () => {
+              this.$router.replace({ path: '/' })
+            }
+          })
+        } else if (LogResult.msg === '用户名或密码错误') {
+          this.$message.error('用户名或密码错误')
         }
+      })
+    },
+    onReset () {
+      this.inputForm = {
+        Name: '',
+        Email: '',
+        Password: ''
       }
     },
-    methods: {
-      onLogin: function(){
-        axios.post(
-          config.log_api,
-          this.$qs.stringify(this.inputForm),
-        ).then((res) => {
-          // Check the callback
-          var log_result = res.data
-          if(log_result.message == "登录成功")
-          {
-            localStorage.setItem('token', log_result.token)
-            localStorage.setItem('username', log_result.username)
-            this.$message({
-              message: "登陆成功",
-              type: 'success',
-              onClose:() => {
-                this.$router.replace({path: '/'})
-              }
-            });
-          }
-          else if(log_result.message === "用户名或密码错误")
-          {
-            this.$message.error('用户名或密码错误');
-          }
-          else if (log_result.message === "用户名或密码为空")
-          {
-            this.$message.error('用户名或密码为空');
-          }
-        })
-      },
-      onReset() {
-        this.inputForm = {
-          Name: '',
-          Password: ''
-        }
-      },
-      toRegister(){
-        this.$router.push({path: '/Register'})
-      }
-
+    toRegister () {
+      this.$router.push({ path: '/Register' })
     }
+
   }
+}
 </script>
 
 <style scoped>
