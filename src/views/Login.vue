@@ -82,18 +82,24 @@ export default {
         JSON.stringify(this.inputForm)
       ).then((response) => {
         console.log(response)
+        console.log(typeof response.headers)
         var LogResult = response.data
-        if (LogResult.msg === '登录成功') {
-          localStorage.setItem('token', LogResult.token)
-          localStorage.setItem('username', LogResult.username)
+        // TODO:  莫名奇妙的原因导致response.header.get is not a function
+        // 使用new Header(xxx) 解决
+        if (LogResult.code === 200) {
+          const myHeaders = new Headers(response.headers)
+          console.log(myHeaders.get('scarlet'))
+          localStorage.setItem('token', myHeaders.get('scarlet'))
+          // localStorage.setItem('username', LogResult.username)
           this.$message({
             message: '登陆成功',
             type: 'success',
             onClose: () => {
+              this.Global.drawer = true
               this.$router.replace({ path: '/' })
             }
           })
-        } else if (LogResult.msg === '用户名或密码错误') {
+        } else if (LogResult.code === 400) {
           this.$message.error('用户名或密码错误')
         }
       })

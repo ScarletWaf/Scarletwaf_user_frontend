@@ -90,7 +90,7 @@ export default {
       ).then((response) => {
         console.log(response.data)
         var RegisterResult = response.data
-        if (RegisterResult.msg === '注册成功') {
+        if (RegisterResult.code === 200) {
           this.$message({
             message: '注册成功',
             type: 'success',
@@ -98,7 +98,7 @@ export default {
               this.$router.replace({ path: '/Login' })
             }
           })
-        } else if (RegisterResult.code === '用户不合法') {
+        } else if (RegisterResult.code === 400) {
           this.$message.error('用户名不合法')
         }
       })

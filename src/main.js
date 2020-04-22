@@ -7,11 +7,11 @@ import VueAxios from 'vue-axios'
 import VCharts from 'v-charts'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import qs from 'qs'
+import Global from './Global'
 
 Vue.config.productionTip = false
-// Vue.prototype.$axios = axios
-Vue.prototype.qs = qs
+
+Vue.prototype.Global = Global
 
 Vue.use(VueAxios, axios)
 Vue.use(VCharts)

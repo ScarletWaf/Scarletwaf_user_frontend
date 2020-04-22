@@ -5,6 +5,8 @@
       v-model="drawer"
       :clipped="$vuetify.breakpoint.lgAndUp"
       app
+      expand-on-hover
+      width="210"
     >
 <!--      尝试循环失败-->
       <v-list>
@@ -12,6 +14,18 @@
         <v-list-item
           link
           to="/"
+        >
+          <v-list-item-icon>
+            <v-icon>mdi-home-variant-outline</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>首页</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item
+          link
+          to="/WafDetails"
         >
           <v-list-item-icon>
             <v-icon>mdi-monitor-screenshot</v-icon>
@@ -42,18 +56,6 @@
           </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title>蜜罐</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-
-        <v-list-item
-          link
-          to="/Message"
-        >
-          <v-list-item-icon>
-            <v-icon>mdi-bell</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title>消息通知</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -90,6 +92,7 @@
       app
       color="grey darken-1"
       dark
+      v-if="this.$route.name !== 'Login' && this.$route.name !== 'Register'"
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
 
@@ -128,14 +131,12 @@ export default {
   },
   data: () => ({
     dialog: false,
-    drawer: false,
-    items: [
-      { icon: 'mdi-contacts', text: 'Contacts', link: '/' },
-      { icon: 'mdi-contacts', text: 'Contacts', link: '/RuleConfig' }
-    ]
+    drawer: false
   }),
   methods: {
     onLogout () {
+      localStorage.removeItem('token')
+      this.drawer = false
       this.$router.push({ path: '/Login' })
     }
   }

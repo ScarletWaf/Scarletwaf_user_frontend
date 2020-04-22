@@ -1,15 +1,13 @@
 <template>
     <div>
-      消息通知
+        Main Page
     </div>
 </template>
 
 <script>
-export default {
-  name: 'Message'
-}
+export default {}
 </script>
 
-<style scoped>
+<style>
 
 </style>
