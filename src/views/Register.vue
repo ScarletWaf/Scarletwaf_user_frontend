@@ -3,7 +3,7 @@
   <v-content>
     <v-snackbar v-model="messageBar" color="error" :timeout="2000" :top="true">{{ message }}</v-snackbar>
     <v-row align="center" justify="center" style="margin-top: 5%;">
-      <h1 class="display-2 font-weight-thin">ScarletWaf</h1>
+      <img src="../assets/logo2.png" height="150px" width="300px">
     </v-row>
     <br>
     <v-card class="mx-auto" max-width="400">

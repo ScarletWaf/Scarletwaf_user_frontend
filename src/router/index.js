@@ -18,8 +18,8 @@ const routes = [
     component: Main
   },
   {
-    path: '/WafDtails',
-    name: 'WafDtails',
+    path: '/WafDetails',
+    name: 'WafDetails',
     component: WafDetails
   },
   {

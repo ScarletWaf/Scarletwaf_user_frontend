@@ -2,7 +2,7 @@
   <div>
     <v-dialog v-model="dialog" max-width="500px">
       <template v-slot:activator="{ on }">
-        <v-btn class="mx-2 float-right btn" fab dark color="red" @click="addRule" v-on="on">
+        <v-btn class="mx-2 float-right btn" fab dark color="red"  v-on="on">
           <v-icon dark>mdi-plus</v-icon>
         </v-btn>
       </template>
@@ -12,14 +12,14 @@
         </v-card-title>
 
         <v-card-text>
-          <v-text-field v-model="inputForm.ruleType" label="ruleType"></v-text-field>
-          <v-text-field v-model="inputForm.ruleContent" label="ruleContent"></v-text-field>
+          <v-select :items="ruleTypes" v-model="inputForm.type" label="ruleType"></v-select>
+          <v-text-field  v-model="inputForm.content" label="ruleContent"></v-text-field>
         </v-card-text>
 
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
-          <v-btn color="blue darken-1" text @click="save">Save</v-btn>
+          <v-btn color="blue darken-1" text @click="close">取消</v-btn>
+          <v-btn color="blue darken-1" text @click="add">添加</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -29,11 +29,14 @@
 <script>
 export default {
   name: 'AddRule',
+  inject: ['reload'],
+  props: ['ruleTypes'],
   data: () => ({
     dialog: false,
+    serverId: parseInt(sessionStorage.getItem('serverId')),
     inputForm: {
-      ruleType: '',
-      ruleContent: ''
+      content: '',
+      type: ''
     }
   }),
   watch: {
@@ -42,24 +45,51 @@ export default {
     }
   },
   methods: {
-    editItem (item) {
-      this.editedIndex = this.desserts.indexOf(item)
-      this.editedItem = Object.assign({}, item)
-      this.dialog = true
-    },
     close () {
       this.dialog = false
-      setTimeout(() => {
-        this.editedItem = Object.assign({}, this.defaultItem)
-        this.editedIndex = -1
-      }, 300)
     },
-    save () {
-      if (this.editedIndex > -1) {
-        Object.assign(this.desserts[this.editedIndex], this.editedItem)
+    add () {
+      if (sessionStorage.getItem('uriId') === null) {
+        const obj = {
+          server_id: this.serverId,
+          rules: [
+            this.inputForm
+          ]
+        }
+        this.axios.post(
+          'http://39.96.77.139:8080/user/rule/add',
+          JSON.stringify(obj),
+          { headers: { scarlet: localStorage.getItem('token') } }
+        ).then((response) => {
+          if (response.data.code === 200) {
+            console.log(200)
+            this.reload()
+          } else if (response.data.code === 400) {
+            this.$message.error('表单不合法')
+          }
+        })
       } else {
-        this.desserts.push(this.editedItem)
+        const obj = {
+          server_id: this.serverId,
+          uri_id: parseInt(sessionStorage.getItem('uriId')),
+          rules: [
+            this.inputForm
+          ]
+        }
+        this.axios.post(
+          'http://39.96.77.139:8080/user/rule/add',
+          JSON.stringify(obj),
+          { headers: { scarlet: localStorage.getItem('token') } }
+        ).then((response) => {
+          if (response.data.code === 200) {
+            console.log(200)
+            this.reload()
+          } else if (response.data.code === 400) {
+            this.$message.error('表单不合法')
+          }
+        })
       }
+
       this.close()
     }
   }

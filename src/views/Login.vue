@@ -3,7 +3,8 @@
   <v-content>
     <v-snackbar v-model="messageBar" color="error" :timeout="2000" :top="true">{{ message }}</v-snackbar>
     <v-row align="center" justify="center" style="margin-top: 5%;">
-      <h1 class="display-2 font-weight-thin">ScarletWaf</h1>
+<!--      <h1 class="display-2 font-weight-thin">ScarletWaf</h1>-->
+      <img src="../assets/logo2.png" height="150px" width="300px">
     </v-row>
     <br>
     <v-card class="mx-auto" max-width="400">
@@ -90,12 +91,10 @@ export default {
           const myHeaders = new Headers(response.headers)
           console.log(myHeaders.get('scarlet'))
           localStorage.setItem('token', myHeaders.get('scarlet'))
-          // localStorage.setItem('username', LogResult.username)
           this.$message({
             message: '登陆成功',
             type: 'success',
             onClose: () => {
-              this.Global.drawer = true
               this.$router.replace({ path: '/' })
             }
           })
@@ -112,7 +111,7 @@ export default {
       }
     },
     toRegister () {
-      this.$router.push({ path: '/Register' })
+      this.$router.replace({ path: '/Register' })
     }
 
   }
