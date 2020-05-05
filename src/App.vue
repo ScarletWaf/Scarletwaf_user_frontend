@@ -15,10 +15,10 @@
         <v-list-item
           link
           to="/"
-          @click="remove,ColorChange"
+          @click="remove,ColorChange,currentTab='Servers'"
         >
           <v-list-item-icon>
-            <v-icon v-bind:color="MainColor">mdi-home</v-icon>
+            <v-icon :color="currentTab==='Servers'?'red':''">mdi-home</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title>服务器</v-list-item-title>
@@ -28,10 +28,10 @@
         <v-list-item
           link
           to="/RuleConfig"
-          @click="ColorChange"
+          @click="currentTab='RuleConfig'"
         >
           <v-list-item-icon>
-            <v-icon v-bind:color="RuleConfigColor">mdi-cog</v-icon>
+            <v-icon :color="currentTab==='RuleConfig'?'red':''">mdi-cog</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title>规则配置</v-list-item-title>
@@ -40,10 +40,10 @@
 
         <v-list-item
           link
-          to="/WafDetails"
+          to="/WafDetails" @click="currentTab='WafDetails'"
         >
           <v-list-item-icon>
-            <v-icon>mdi-monitor-screenshot</v-icon>
+            <v-icon :color="currentTab==='WafDetails'?'red':''">mdi-monitor-screenshot</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title>Waf 实时信息</v-list-item-title>
@@ -52,10 +52,10 @@
 
         <v-list-item
           link
-          to="/ScarletPot"
+          to="/ScarletPot" @click="currentTab='ScarletPot'"
         >
           <v-list-item-icon>
-            <v-icon>mdi-beehive-outline</v-icon>
+            <v-icon :color="currentTab==='ScarletPot'?'red':''">mdi-beehive-outline</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title>蜜罐</v-list-item-title>
@@ -64,10 +64,10 @@
 
         <v-list-item
           link
-          to="/Test"
+          to="/Test" @click="currentTab='Test'"
         >
           <v-list-item-icon>
-            <v-icon>mdi-bell</v-icon>
+            <v-icon :color="currentTab==='Test'?'red':''">mdi-bell</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title>Test</v-list-item-title>
@@ -76,10 +76,10 @@
 
         <v-list-item
           link
-          to="/WafAdmin"
+          to="/WafAdmin" @click="currentTab='WafAdmin'"
         >
           <v-list-item-icon>
-            <v-icon>mdi-bell</v-icon>
+            <v-icon :color="currentTab==='WafAdmin'?'red':''">mdi-bell</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title>Waf选项</v-list-item-title>
@@ -158,7 +158,8 @@ export default {
     isRouterAlive: true,
     drawer: false,
     MainColor: '',
-    RuleConfigColor: ''
+    RuleConfigColor: '',
+    currentTab: 'Servers'
   }),
   created () {
   },
@@ -198,5 +199,8 @@ export default {
     /*background: linear-gradient(to right,black,darkred);*/
     /*-webkit-background-clip: text;*/
     /*color: transparent;*/
+  }
+  .red{
+    background-color: red;
   }
 </style>
