@@ -59,6 +59,11 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  if (from === 'WafDetaills') {
+    // always clear server and uri info
+    sessionStorage.removeItem('serverId')
+    sessionStorage.removeItem('uriId')
+  }
   // 路由守卫
   var token = localStorage.getItem('token')
 

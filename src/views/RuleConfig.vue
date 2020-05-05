@@ -74,7 +74,7 @@ export default {
   },
   data () {
     return {
-      show: false,
+      show: true,
       tab: null,
       serverId: parseInt(sessionStorage.getItem('serverId')),
       ruleTypes: [
@@ -113,10 +113,13 @@ export default {
               contentArray[j] = response.data.data[j].content
             }
             ruleArray[i] = contentArray
+            // retrieve all rule and save in ruleArray example: [[#getrule,max to 15 items],[#post...]...]
           }
         })
       }
     } else {
+      // if uriId not exists
+      // then we get the server rule
       for (let i = 0; i < types.length; i++) {
         const obj = {
           page: 1,
@@ -147,6 +150,9 @@ export default {
     // sessionStorage.removeItem('serverId')
   },
   methods: {
+    // 事实上 我就不经常点这个，而是直接导航栏跳转。问题就会出现在这里。
+    // uriID和serverId永远不会被清除。
+    // 遂在路由守卫中做了特判
     btn () {
       this.$router.replace('/')
       sessionStorage.removeItem('serverId')

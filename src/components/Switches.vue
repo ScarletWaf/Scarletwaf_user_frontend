@@ -6,17 +6,19 @@
         :key="index"
         :cols=3
       >
-        <v-switch v-model="sw.value" inset :label="sw.name" @change="changeSwitch(sw.name,sw.value)"></v-switch>
+        <v-switch v-model="sw.value" inset :label="sw.name" @change="changeSwitch(sw.key,sw.value)"></v-switch>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
+import { nameMap } from '../maps.js'
 export default {
   name: 'Switches',
   inject: ['reload'],
   data: () => ({
+    nameMap,
     switches: [
       { name: 'CC攻击防御', key: 'cc_defense', value: false },
       { name: 'COOKIE过滤', key: 'cookie_check', value: false },
@@ -74,34 +76,9 @@ export default {
     }
   },
   methods: {
-    changeSwitch (name, value) {
-      let ConfigName, obj
-      switch (name) {
-        case 'CC攻击防御' :
-          ConfigName = 'cc'
-          break
-        case 'COOKIE过滤' :
-          ConfigName = 'cookie'
-          break
-        case 'GET过滤' :
-          ConfigName = 'get'
-          break
-        case 'IP黑名单' :
-          ConfigName = 'blackip'
-          break
-        case 'IP白名单' :
-          ConfigName = 'whiteip'
-          break
-        case 'POST过滤' :
-          ConfigName = 'post'
-          break
-        case 'SQL语义识别' :
-          ConfigName = 'sql'
-          break
-        case 'UA过滤' :
-          ConfigName = 'ua'
-          break
-      }
+    changeSwitch (key, value) {
+      let obj
+      const ConfigName = this.nameMap[key]
       if (sessionStorage.getItem('uriId') === null) {
         obj = {
           server_id: parseInt(sessionStorage.getItem('serverId')),
