@@ -4,6 +4,7 @@
       <thead>
       <tr>
         <th class="font-weight-black subtitle-1">URI</th>
+        <td></td>
         <add-uri :server-id="serverId"></add-uri>
       </tr>
       </thead>
@@ -76,7 +77,7 @@ export default {
 </script>
 
 <style scoped>
-  .config{
-    margin-right: 8px;
-  }
+  /*.config{*/
+  /*  margin-right: 8px;*/
+  /*}*/
 </style>

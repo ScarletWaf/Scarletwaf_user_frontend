@@ -62,29 +62,29 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item
-          link
-          to="/Test" @click="currentTab='Test'"
-        >
-          <v-list-item-icon>
-            <v-icon :color="currentTab==='Test'?'red':''">mdi-bell</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title>Test</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+<!--        <v-list-item-->
+<!--          link-->
+<!--          to="/Test" @click="currentTab='Test'"-->
+<!--        >-->
+<!--          <v-list-item-icon>-->
+<!--            <v-icon :color="currentTab==='Test'?'red':''">mdi-bell</v-icon>-->
+<!--          </v-list-item-icon>-->
+<!--          <v-list-item-content>-->
+<!--            <v-list-item-title>Test</v-list-item-title>-->
+<!--          </v-list-item-content>-->
+<!--        </v-list-item>-->
 
-        <v-list-item
-          link
-          to="/WafAdmin" @click="currentTab='WafAdmin'"
-        >
-          <v-list-item-icon>
-            <v-icon :color="currentTab==='WafAdmin'?'red':''">mdi-bell</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title>Waf选项</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+<!--        <v-list-item-->
+<!--          link-->
+<!--          to="/WafAdmin" @click="currentTab='WafAdmin'"-->
+<!--        >-->
+<!--          <v-list-item-icon>-->
+<!--            <v-icon :color="currentTab==='WafAdmin'?'red':''">mdi-bell</v-icon>-->
+<!--          </v-list-item-icon>-->
+<!--          <v-list-item-content>-->
+<!--            <v-list-item-title>Waf选项</v-list-item-title>-->
+<!--          </v-list-item-content>-->
+<!--        </v-list-item>-->
 
       </v-list>
 
