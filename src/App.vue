@@ -52,7 +52,7 @@
 
         <v-list-item
           link
-          to="/ScarletPot" @click="currentTab='ScarletPot'"
+          @click="currentTab='ScarletPot', toPot()"
         >
           <v-list-item-icon>
             <v-icon :color="currentTab==='ScarletPot'?'red':''">mdi-beehive-outline</v-icon>
@@ -162,6 +162,7 @@ export default {
     currentTab: 'Servers'
   }),
   created () {
+    // sessionStorage.setItem('currentTab', 'Servers')
   },
   methods: {
     onLogout () {
@@ -182,7 +183,8 @@ export default {
       sessionStorage.removeItem('serverId')
       sessionStorage.removeItem('uriId')
     },
-    ColorChange () {
+    toPot () {
+      window.location.href = 'http://pot.hades300.top/'
     }
   }
 }
