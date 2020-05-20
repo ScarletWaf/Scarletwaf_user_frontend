@@ -8,12 +8,32 @@
       </template>
       <v-card>
         <v-card-title>
-          <span class="headline">添加规则</span>
+          <v-row  style="flex:5"><span class="headline">添加规则</span> </v-row>
+          <v-row style="flex:2">
+          <v-checkbox
+            v-model="multi"
+            label="多规则添加"
+            color="secondary"
+            value
+            hide-details
+            class=""
+          ></v-checkbox>
+          </v-row>
         </v-card-title>
 
         <v-card-text>
-          <v-select :items="ruleTypes" v-model="inputForm.type" label="ruleType"></v-select>
-          <v-text-field  v-model="inputForm.content" label="ruleContent"></v-text-field>
+          <v-select :items="ruleTypes" v-model="inputForm.type" label="规则类型"></v-select>
+          <v-text-field  v-model="inputForm.content" label="规则正文" v-if="!multi"></v-text-field>
+          <v-textarea
+            v-if="multi"
+            v-model="inputForm.content"
+            filled
+            label="规则正文"
+            auto-grow
+            outlined
+            value="The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through."
+          >
+          </v-textarea>
         </v-card-text>
 
         <v-card-actions>
@@ -37,7 +57,8 @@ export default {
     inputForm: {
       content: '',
       type: ''
-    }
+    },
+    multi: false
   }),
   watch: {
     dialog (val) {
@@ -49,47 +70,42 @@ export default {
       this.dialog = false
     },
     add () {
-      if (sessionStorage.getItem('uriId') === null) {
-        const obj = {
-          server_id: this.serverId,
-          rules: [
-            this.inputForm
-          ]
+      const singleAddURL = 'http://39.96.77.139:8080/user/rule/add'
+      const multiAddURL = 'http://39.96.77.139:8080/user/rule/multiadd'
+      const target = this.multi ? multiAddURL : singleAddURL
+      var payload = {}
+      if (this.multi) {
+        payload = {
+          server_id: sessionStorage.getItem('serverId') === null ? 0 : parseInt(sessionStorage.getItem('serverId')),
+          uri_id: sessionStorage.getItem('uriId') === null ? 0 : parseInt(sessionStorage.getItem('uriId')),
+          type: this.inputForm.type,
+          content: this.inputForm.content
         }
-        this.axios.post(
-          'http://39.96.77.139:8080/user/rule/add',
-          JSON.stringify(obj),
-          { headers: { scarlet: localStorage.getItem('token') } }
-        ).then((response) => {
-          if (response.data.code === 200) {
-            console.log(200)
-            this.reload()
-          } else if (response.data.code === 400) {
-            this.$message.error('表单不合法')
-          }
-        })
       } else {
-        const obj = {
-          server_id: this.serverId,
-          uri_id: parseInt(sessionStorage.getItem('uriId')),
+        payload = {
+          server_id: sessionStorage.getItem('serverId') === null ? 0 : parseInt(sessionStorage.getItem('serverId')),
+          uri_id: sessionStorage.getItem('uriId') === null ? 0 : parseInt(sessionStorage.getItem('uriId')),
           rules: [
             this.inputForm
           ]
         }
-        this.axios.post(
-          'http://39.96.77.139:8080/user/rule/add',
-          JSON.stringify(obj),
-          { headers: { scarlet: localStorage.getItem('token') } }
-        ).then((response) => {
-          if (response.data.code === 200) {
-            console.log(200)
-            this.reload()
-          } else if (response.data.code === 400) {
-            this.$message.error('表单不合法')
-          }
-        })
       }
-
+      console.log(JSON.stringify(payload))
+      this.axios.post(
+        target,
+        JSON.stringify(payload),
+        { headers: { scarlet: localStorage.getItem('token'), 'Content-Type': 'application/json' } }
+      ).then((response) => {
+        console.log(response)
+        if (response.data.code === 200) {
+          console.log(200)
+          this.reload()
+        } else if (response.data.code === 400) {
+          this.$message.error('表单不合法')
+        }
+      }).catch((err) => {
+        console.log(err.response)
+      })
       this.close()
     }
   }
