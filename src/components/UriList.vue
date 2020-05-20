@@ -32,6 +32,8 @@
 </template>
 
 <script>
+  import config from '../config'
+
 import AddUri from './AddUri'
 export default {
   name: 'UriList',
@@ -56,7 +58,7 @@ export default {
         server_id: serverId
       }
       this.axios.post(
-        'http://39.96.77.139:8080/user/uri/delete',
+        config.uriDelApi,
         JSON.stringify(obj),
         { headers: { scarlet: localStorage.getItem('token') } }
       ).then((response) => {

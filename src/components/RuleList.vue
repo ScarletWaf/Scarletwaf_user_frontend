@@ -17,6 +17,8 @@
 </template>
 
 <script>
+  import config from '../config'
+
 export default {
   name: 'RuleList',
   inject: ['reload'],
@@ -47,7 +49,7 @@ export default {
           type: this.ruleTypes[this.index]
         }
         this.axios.post(
-          'http://39.96.77.139:8080/user/rule/delete',
+          config.ruleDelApi,
           JSON.stringify(obj),
           { headers: { scarlet: localStorage.getItem('token') } }
         ).then((response) => {
@@ -63,7 +65,7 @@ export default {
           type: this.ruleTypes[this.index]
         }
         this.axios.post(
-          'http://39.96.77.139:8080/user/rule/delete',
+          config.ruleDelApi,
           JSON.stringify(obj),
           { headers: { scarlet: localStorage.getItem('token') } }
         ).then((response) => {

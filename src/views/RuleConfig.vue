@@ -64,6 +64,8 @@ import RuleList from '../components/RuleList'
 import AddRule from '../components/AddRule'
 // import bus from '../utils/eventBus'
 import Switches from '../components/Switches'
+  import config from '../config'
+
 
 export default {
   name: 'RuleConfig',
@@ -102,7 +104,7 @@ export default {
         }
         // console.log(this.serverId)
         this.axios.post(
-          'http://39.96.77.139:8080/user/rule/get',
+          config.ruleGetApi,
           JSON.stringify(obj),
           { headers: { scarlet: localStorage.getItem('token') } }
         ).then((response) => {
@@ -129,7 +131,7 @@ export default {
           uri_id: parseInt(sessionStorage.getItem('uriId'))
         }
         this.axios.post(
-          'http://39.96.77.139:8080/user/rule/get',
+          config.ruleGetApi,
           JSON.stringify(obj),
           { headers: { scarlet: localStorage.getItem('token') } }
         ).then((response) => {

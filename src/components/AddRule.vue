@@ -47,6 +47,8 @@
 </template>
 
 <script>
+import config from '../config'
+
 export default {
   name: 'AddRule',
   inject: ['reload'],
@@ -70,8 +72,8 @@ export default {
       this.dialog = false
     },
     add () {
-      const singleAddURL = 'http://39.96.77.139:8080/user/rule/add'
-      const multiAddURL = 'http://39.96.77.139:8080/user/rule/multiadd'
+      const singleAddURL = config.singleRuleAddApi
+      const multiAddURL = config.multiRuleAddApi
       const target = this.multi ? multiAddURL : singleAddURL
       var payload = {}
       if (this.multi) {

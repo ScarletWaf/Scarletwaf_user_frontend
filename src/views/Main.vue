@@ -61,6 +61,8 @@
 <script>
 import AddServer from '../components/AddServer'
 import UriList from '../components/UriList'
+  import config from '../config'
+
 // import bus from '../utils/eventBus'
 
 export default {
@@ -78,7 +80,7 @@ export default {
   mounted () {
     var data = []
     this.axios.post(
-      'http://39.96.77.139:8080/user/server/get',
+     config.serverGetApi,
       {},
       { headers: { scarlet: localStorage.getItem('token') } }
     ).then((response) => {
@@ -100,7 +102,7 @@ export default {
         // TODO: 不懂为什么const改成var后URI列表无法正常显示，明明数字是一样的
         const CurServerId = this.cards[i].serverId
         this.axios.post(
-          'http://39.96.77.139:8080/user/uri/get',
+          config.uriGetApi,
           JSON.stringify({ server_id: CurServerId }),
           { headers: { scarlet: localStorage.getItem('token') } }
         ).then((res) => {
@@ -125,7 +127,7 @@ export default {
     deleteItem (ServerId) {
       console.log(ServerId)
       this.axios.post(
-        'http://39.96.77.139:8080/user/server/delete',
+        config.serverDelApi,
         JSON.stringify({ server_id: ServerId }),
         { headers: { scarlet: localStorage.getItem('token') } }
       ).then((response) => {

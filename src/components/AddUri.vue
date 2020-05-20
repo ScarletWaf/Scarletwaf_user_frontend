@@ -26,7 +26,10 @@
 </template>
 
 <script>
+  import config from '../config'
+
 export default {
+  
   name: 'AddUri',
   inject: ['reload'],
   props: ['serverId'],
@@ -49,7 +52,7 @@ export default {
       this.inputForm.server_id = this.serverId
       console.log(this.serverId)
       this.axios.post(
-        'http://39.96.77.139:8080/user/uri/add',
+        config.uriAddApi,
         JSON.stringify(this.inputForm),
         { headers: { scarlet: localStorage.getItem('token') } }
       ).then((response) => {

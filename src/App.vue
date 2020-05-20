@@ -184,7 +184,7 @@ export default {
       sessionStorage.removeItem('uriId')
     },
     toPot () {
-      window.location.href = 'http://pot.hades300.top/'
+      window.location.href = 'http://127.0.0.1:8081/'
     }
   }
 }

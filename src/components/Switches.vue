@@ -13,6 +13,8 @@
 </template>
 
 <script>
+  import config from '../config'
+
 import { nameMap } from '../maps.js'
 export default {
   name: 'Switches',
@@ -36,7 +38,7 @@ export default {
         server_id: parseInt(sessionStorage.getItem('serverId'))
       }
       this.axios.post(
-        'http://39.96.77.139:8080/user/switch/get ',
+        config.switchGetApi,
         JSON.stringify(obj),
         { headers: { scarlet: localStorage.getItem('token') } }
       ).then((response) => {
@@ -59,7 +61,7 @@ export default {
         uri_id: parseInt(sessionStorage.getItem('uriId'))
       }
       this.axios.post(
-        'http://39.96.77.139:8080/user/switch/get',
+        config.switchGetApi,
         JSON.stringify(obj),
         { headers: { scarlet: localStorage.getItem('token') } }
       ).then((response) => {
@@ -94,7 +96,7 @@ export default {
         }
       }
       this.axios.post(
-        'http://39.96.77.139:8080/user/switch/change',
+        config.switchChangeApi,
         JSON.stringify(obj),
         { headers: { scarlet: localStorage.getItem('token') } }
       ).then((response) => {

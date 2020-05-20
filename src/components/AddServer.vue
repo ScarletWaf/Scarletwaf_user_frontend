@@ -27,6 +27,8 @@
 </template>
 
 <script>
+import config from '../config'
+
 export default {
   name: 'AddServer',
   inject: ['reload'],
@@ -50,7 +52,7 @@ export default {
       var arr = []
       arr[0] = this.inputForm
       this.axios.post(
-        'http://39.96.77.139:8080/user/server/add',
+        config.serverAddApi,
         JSON.stringify(arr),
         { headers: { scarlet: localStorage.getItem('token') } }
       ).then((response) => {
