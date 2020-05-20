@@ -12,7 +12,7 @@
         </v-card-title>
 
         <v-card-text>
-          <v-text-field v-model="inputForm.path" label="path"></v-text-field>
+          <v-text-field v-model="inputForm.path" label="URI"></v-text-field>
         </v-card-text>
 
         <v-card-actions>

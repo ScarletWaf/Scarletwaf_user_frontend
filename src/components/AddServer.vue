@@ -12,8 +12,8 @@
         </v-card-title>
 
         <v-card-text>
-          <v-text-field v-model="inputForm.domain" label="domain"></v-text-field>
-          <v-text-field v-model="inputForm.ip" label="ip"></v-text-field>
+          <v-text-field v-model="inputForm.domain" label="域名"></v-text-field>
+          <v-text-field v-model="inputForm.ip" label="IP"></v-text-field>
         </v-card-text>
 
         <v-card-actions>
